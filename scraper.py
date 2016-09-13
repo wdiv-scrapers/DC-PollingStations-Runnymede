@@ -1,4 +1,4 @@
-from gml_scraper import scrape
+from dc_base_scrapers.xml_scraper import GmlScraper
 
 
 stations_url = "http://maps.runnymede.gov.uk/arcgis/services/runnymedeinspire/MapServer/WFSServer?service=WFS&version=1.3.0&request=GetFeature&typeNames=runnymedeinspire%3APolling_Stations"
@@ -28,5 +28,7 @@ districts_fields = {
 council_id = 'E07000212'
 
 
-scrape(stations_url, council_id, 'stations', stations_fields, 'OBJECTID')
-scrape(districts_url, council_id, 'districts', districts_fields, 'OBJECTID')
+stations_scraper = GmlScraper(stations_url, council_id, 'stations', stations_fields, 'OBJECTID')
+stations_scraper.scrape()
+districts_scraper = GmlScraper(districts_url, council_id, 'districts', districts_fields, 'OBJECTID')
+districts_scraper.scrape()
